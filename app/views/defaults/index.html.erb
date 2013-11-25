@@ -1,0 +1,36 @@
+<% if notice %><p id="notice"><%= notice %></p><% end %>
+<h1><%= @garage.name %></h1>
+
+<div id="first-row">
+	<div id="left-column">
+		<%= image_tag @garage.avatar.url %>
+	</div>
+	<div id="right-column">
+		<p>
+		  <i class="fa fa-phone 2x"></i>
+		  <%= @garage.phone %>
+		</p>
+
+		<p>
+		  <i class="fa fa-envelope"></i>
+		  <%= @garage.email %>
+		</p>
+
+		<p>
+		  <i class="fa fa-home"></i>
+		  <%= @garage.address %>
+		</p>
+
+		<p>
+		  <i class="fa fa-credit-card"></i>
+		  <%= @garage.cif %>
+		</p>
+	</div>
+</div>
+<div id="second-row">
+	<ul>
+		<li><%= link_to "Nuevo cliente", new_owner_path %></li>
+		<li><%= link_to "Nueva entrada al taller", new_entry_path %></li>
+		<li><%= link_to "Registro de coche", log_coche_path %></li>
+	</ul>
+</div>

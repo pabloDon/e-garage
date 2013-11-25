@@ -1,0 +1,109 @@
+<%= form_for(@entry) do |f| %>
+  <% if @entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+
+      <ul>
+      <% @entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if f.object.new_record? %>
+	<div>
+		<div class="field" id="busqueda-dni">
+			<%= label_tag "Búsqueda de cliente por DNI" %>
+			<%= text_field_tag "search[dni_cliente]", nil, :id =>"search_dni_cliente", :placeholder => 'DNI cliente', data: {autocomplete_source: search_dni_cliente_path} %>
+		</div>
+		<%= link_to "Nuevo cliente", "#", :id => "add-cliente"%>
+	</div>
+  <% end %>
+	<div id="form-cliente" style="display:<%= f.object.new_record? ? "none" : "" %>">
+		<fieldset>
+			<h3>Nuevo cliente</h3>
+			<div class="field">
+				<%= label_tag :first_name, "Nombre*" %>
+				<%= text_field_tag :first_name, nil, :id => "owner_first_name" %>
+			</div>
+			<div class="field">
+				<%= label_tag :last_name, "Apellidos*" %>
+				<%= text_field_tag :last_name, nil, :id => "owner_last_name" %>
+			</div>
+			<div class="field">
+				<%= label_tag :phone, "Teléfono*" %>
+				<%= text_field_tag :phone, nil, :id => "owner_phone" %>
+			</div>
+			<div class="field">
+				<%= label_tag :mobile, "Teléfono móvil" %>
+				<%= text_field_tag :mobile, nil, :id => "owner_mobile" %>
+			</div>
+		</fieldset>
+	</div>
+	<div class="form_owner" id="busqueda-matricula">
+		<%= f.hidden_field :owner_id %>
+	</div>
+  <div class="field">
+    <%#= f.label :owner_id %><br />
+    <%#= f.number_field :owner_id %>
+  </div>
+<% if f.object.new_record? %>
+	<div>
+		<div class="field" id="busqueda-coche">
+			<%= label_tag "Búsqueda de coche por matrícula" %>
+			<%= text_field_tag "search[matricula_coche]", nil %>
+		</div>
+		<%= link_to "Nuevo coche", "#", :id => 'add-coche' %>
+	</div>
+  <% end %>
+	<div id="form-coche" style="display:<%= f.object.new_record? ? "none" : "" %>">
+		<fieldset>
+			<h3>Nuevo coche</h3>
+			<div class="field">
+				<%= label_tag :maker_id, "Fabricante*" %>
+				<%= text_field_tag :maker_id, nil, :id =>"search_marca_coche", :placeholder => 'Fabricante', data: {autocomplete_source: search_marca_coche_path} %>
+			</div>
+			<div class="field">
+				<%= label_tag :modelo_id, "Modelo*" %>
+				<%= text_field_tag :modelo_id, nil, :id =>"search_modelo_coche", :placeholder => 'Modelo', data: {autocomplete_source: search_modelo_coche_path} %>
+			</div>
+			<div class="field">
+				<%= label_tag :year, "Año*" %>
+				<%= text_field_tag :year, nil, :id => "search_year_coche" %>
+			</div>
+			<div class="field">
+				<%= label_tag :mileage, "Kilometraje*" %>
+				<%= text_field_tag :mileage, nil, :id => "search_km_coche" %>
+			</div>
+		</fieldset>
+	</div>
+	<div class="form_car">
+		<%= f.hidden_field :car_id, :id => "add-car"%>
+	</div>
+  <div class="field">
+    <%#= f.label :car_id %><br />
+    <%#= f.number_field :car_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :comments, "Observaciones" %><br />
+    <%= f.text_area :comments %>
+  </div>
+  <% unless f.object.new_record? %>
+  <div class="field">
+    <%= f.label :status_id, "Estado de reparación" %><br />
+    <%= f.select :status_id, options_for_select([["Pendiente",0],["En desarrollo",1],["Terminado",2],["Factura emitida",3],["Factura pagada",4]]) %>
+  </div>
+  <div class="field">
+    <%= f.label :hours, "Horas de trabajo" %><br />
+    <%= f.number_field :hours %>
+  </div>
+  <div class="field">
+    <%= f.label :departure_date, "Fecha de salida" %><br />
+    <%= f.datetime_select :departure_date %>
+  </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit "Crear registro" %>
+  </div>
+<% end %>

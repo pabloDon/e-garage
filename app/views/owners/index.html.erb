@@ -1,0 +1,13 @@
+<h1 class="inline"><%= get_index_header %></h1>
+
+<%= link_to 'Nuevo cliente', new_owner_path, :class => "boton", :id => "new_owner" %>
+
+<% @owners.each do |owner| %>
+  <a class="owner-link" href="<%= owner_path owner %>">
+  	<div class="owner-list">
+		<span id="pn"><%= owner.public_name %></span> <span id="phone">(<%= owner.get_phone %>)</span>
+  	</div>
+  </a>
+<% end %>
+
+<br />

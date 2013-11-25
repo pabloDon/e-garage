@@ -1,0 +1,33 @@
+<h1>Listing entries</h1>
+
+<table>
+  <tr>
+    <th>Owner</th>
+    <th>Car</th>
+    <th>Status</th>
+    <th>Comments</th>
+    <th>Hours</th>
+    <th>Departure date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @entries.each do |entry| %>
+  <tr>
+    <td><%= entry.owner_id %></td>
+    <td><%= entry.car_id %></td>
+    <td><%= entry.status_id %></td>
+    <td><%= entry.comments %></td>
+    <td><%= entry.hours %></td>
+    <td><%= entry.departure_date %></td>
+    <td><%= link_to 'Show', entry %></td>
+    <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
+    <td><%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Entry', new_entry_path %>

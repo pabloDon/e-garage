@@ -1,0 +1,2 @@
+module GarageSessionsHelper
+end

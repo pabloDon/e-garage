@@ -1,0 +1,23 @@
+.field{
+	#date_from__1i{
+		margin-top:12px;
+		display: inline-block;
+		width: 60px;
+		margin: 0 2px;
+	}
+	#date_from__2i{
+		@extend #date_from__1i;
+	}
+	#date_from__3i{
+		@extend #date_from__1i;
+	}
+	#date_to__1i{
+		@extend #date_from__1i;
+	}
+	#date_to__2i{
+		@extend #date_from__1i;
+	}
+	#date_to__3i{
+		@extend #date_from__1i;
+	}
+}

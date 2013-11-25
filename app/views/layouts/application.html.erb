@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>E-garage</title>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:600|Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div id="logo_head">
+		<span>E-garage</span>
+	</div>
+	<div id="tag_field">
+		<%= tabs_tag do |tab| %>
+			<% if current_garage_session %>
+	  			<%= tab.home      'Inicio', root_path %>
+	  			<%= tab.garage 	'Mi taller', my_garage_path %>
+	  			<%= tab.customers 'Mis clientes', owners_path %>
+				<%= tab.perfil 'Perfil', profile_path %>
+				<%= tab.logout 'Cerrar sesión', logout_path %>
+			<% else %>
+				<%= tab.register 'Registro', register_path %>
+				<%= tab.login 'Iniciar sesión', login_path %>
+			<% end %>
+	  		
+			<%= tab.about		'Acerca de', about_path %>
+		<% end %>
+	</div>
+	
+	<div id="wrapper">
+		<%= yield %>
+	</div>
+	
+	<div id="footer">
+		<span>&copy;2013 E-garage - Designed, developed and maintained by <%= link_to "Pablo Donaire", "https://github.com/pabloDon", :target => "_blank" %></span>
+	</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<%= form_for(@garage, :url => garages_path, :html => { :multipart => true }) do |f| %>
+  <% if @garage.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@garage.errors.count, "error") %> prohibited this garage from being saved:</h2>
+
+      <ul>
+      <% @garage.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, "Nombre del taller" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :phone, "Teléfono" %>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :email, "Correo electrónico" %>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+	<%= f.label :password, f.object.new_record? ? "Password" : "Cambiar password" %>
+	<%= f.password_field :password %>
+  </div>
+  <div class="field">
+	<%= f.label :password_confirmation, "Confirmar pasword" %>
+	<%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+    <%= f.label :address, "Dirección" %>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :cif, "CIF" %>
+    <%= f.text_field :cif %>
+  </div>
+  <div class="field">
+	<%= f.label :avatar, "Logo" %>
+	<%= f.file_field :avatar %>
+  </div>
+  <div class="actions">
+    <%= f.submit f.object.new_record? ? "Registrar" : "Actualizar"%>
+  </div>
+<% end %>

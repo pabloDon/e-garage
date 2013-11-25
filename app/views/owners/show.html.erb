@@ -1,0 +1,28 @@
+<% if notice %><p id="notice"><%= notice %></p><% end %>
+<h1><%= @owner.public_name %></h1>
+
+<p class="show-info">
+  <i class="fa fa-phone fa-2x"></i>
+  <span><%= @owner.phone %></span>
+</p>
+
+<p class="show-info">
+  <i class="fa fa-mobile fa-2x"></i>
+  <%= @owner.mobile %>
+</p>
+
+<p class="show-info">
+  <i class="fa fa-home fa-2x"></i>
+  <%= @owner.address %>
+</p>
+
+<% unless @owner.cars.empty? %>
+	<h3>Coches en su propiedad</h3>
+	<% @owner.cars.each do |car| %>
+		<div class="car-item"><%= car.public_name %></div>
+	<% end %>
+<% end %>
+
+<%= link_to 'Editar cliente', edit_owner_path(@owner) %> |
+<%= link_to 'Agregar coche', "#" %> |
+<%= link_to 'Atrás', owners_path %>

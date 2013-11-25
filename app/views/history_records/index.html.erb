@@ -1,0 +1,33 @@
+<div id="search-fields">
+	<h3>Filtros de búsqueda</h3>
+	<%= form_tag log_coche_path do %>
+		<div class="field">
+			<%= label_tag :plate, "Matrícula" %>
+			<%= text_field_tag :plate, params[:plate], :placeholder => "Matrícula" %>
+		</div>
+		<div class="field">
+			<%= label_tag :date_from, "Fecha de registro desde" %>
+			<%= date_select :date_from, nil, use_month_numbers: true, prompt: { day: 'Día', month: 'Mes', year: 'Año' } %>
+		</div>
+		<div class="field">
+			<%= label_tag :date_to, "Fecha de registro hasta" %>
+			<%= date_select :date_to, nil, use_month_numbers: true, prompt: { day: 'Día', month: 'Mes', year: 'Año' } %>
+		</div>
+		<div class="action">
+			<%= submit_tag "Filtrar" %>
+		</div>
+	<% end %>
+</div>
+<div id="search-results">
+	<h3><% if params[:search]%>
+			Resultados de la búsqueda (<%= @records.size %>)
+		<% else %>
+			Últimas actualizaciones
+		<% end %>
+	</h3>
+	<% @records.each do |record| %>
+	<div class="row-record">
+		<%= record.created_at.strftime('%d/%m/%Y') %> <%= link_to record.car.plate, record.car %><span> - <%= record.comment %></span>
+	</div>
+	<% end %>
+</div>

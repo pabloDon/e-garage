@@ -1,0 +1,46 @@
+<%= form_for(@owner) do |f| %>
+  <% if @owner.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@owner.errors.count, "error") %> prohibited this owner from being saved:</h2>
+
+      <ul>
+      <% @owner.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name, "Nombre*" %>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+ 	<%= f.label :last_name, "Apellidos*" %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :dni, "DNI*" %>
+    <%= f.text_field :dni %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone, "Teléfono*" %>
+    <%= f.text_field :phone %>
+  </div>
+
+  <div class="field">
+	<%= f.label :mobile, "Teléfono móvil" %>
+    <%= f.text_field :mobile %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address, "Dirección" %>
+    <%= f.text_field :address %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Guardar" %>
+  </div>
+<% end %>
