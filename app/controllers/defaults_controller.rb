@@ -13,4 +13,10 @@ class DefaultsController < ApplicationController
   def about
     set_tab :about
   end
+  
+  def search_marca_coche
+  end
+  
+  def search_modelo_coche
+  end
 end

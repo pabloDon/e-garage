@@ -19,4 +19,17 @@ class CarsController < ApplicationController
     @marcas = Modelo.order(:model).where('model like ?', "%#{params[:term]}%").limit(10)
     render json: @marcas.map(&:model)
   end
+  
+  def create
+    car = Car.new
+    car.color = params[:color]
+    car.maker_id = (Maker.find_by_name(params[:marca]) || Maker.create(name: params[:marca])).id 
+    car.modelo_id = (Modelo.find_by_model(params[:modelo]) || Modelo.create(model: params[:modelo], maker_id:car.maker_id)).id
+    car.mileage = params[:mileage]
+    car.year = params[:year]
+    car.owner_id = params[:owner]
+    Rails.logger.error car.to_yaml
+    
+    render nothing: true
+  end
 end

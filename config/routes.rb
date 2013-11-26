@@ -10,6 +10,7 @@ Egarage::Application.routes.draw do
   match 'search_matricula_coche' => 'cars#search_plate', :as => 'search_matricula_coche'
   match 'search_marca_coche' => 'cars#search_plate', :as => 'search_marca_coche'
   match 'search_modelo_coche' => 'cars#search_plate', :as => 'search_modelo_coche'
+  match 'add-car' => 'cars#create', :as => 'add_car'
   match 'log' =>  'history_records#index', :as => 'log_coche'
   match 'about' => 'defaults#about', :as => 'about'
   resources :garages
