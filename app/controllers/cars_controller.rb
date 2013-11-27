@@ -26,10 +26,11 @@ class CarsController < ApplicationController
     car.maker_id = (Maker.find_by_name(params[:marca]) || Maker.create(name: params[:marca])).id 
     car.modelo_id = (Modelo.find_by_model(params[:modelo]) || Modelo.create(model: params[:modelo], maker_id:car.maker_id)).id
     car.mileage = params[:mileage]
+    car.plate = params[:plate].gsub(/[\.\-\s]/,'').upcase
     car.year = params[:year]
     car.owner_id = params[:owner]
-    Rails.logger.error car.to_yaml
     
+    car.save
     render nothing: true
   end
 end

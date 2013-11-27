@@ -3,10 +3,10 @@ class Car < ActiveRecord::Base
   
   belongs_to :owner
   belongs_to :maker
-  belongs_to :model, :class_name => 'Modelo'
+  belongs_to :modelo, :class_name => 'Modelo'
   
   def public_name
-    return "#{maker.name} #{modelo.name} (#{year})"
+    return "#{maker.name} #{modelo.model} (#{year})"
   end
 
 end
