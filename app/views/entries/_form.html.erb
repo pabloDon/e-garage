@@ -1,3 +1,7 @@
+<%
+	@car ||= Car.new
+	@owner ||= Owner.new
+%>
 <%= form_for(@entry) do |f| %>
   <% if @entry.errors.any? %>
     <div id="error_explanation">
@@ -21,27 +25,27 @@
   <% end %>
 	<div id="form-cliente" style="display:<%= f.object.new_record? ? "none" : "" %>">
 		<fieldset>
-			<h3>Nuevo cliente</h3>
+			<h3><%= f.object.new_record? ? "Nuevo cliente" : "Cliente" %></h3>
 			<div class="field">
 				<%= label_tag :first_name, "Nombre*" %>
-				<%= text_field_tag :first_name, nil, :id => "owner_first_name" %>
+				<%= text_field_tag :first_name, @owner.first_name, :id => "owner_first_name" %>
 			</div>
 			<div class="field">
 				<%= label_tag :last_name, "Apellidos*" %>
-				<%= text_field_tag :last_name, nil, :id => "owner_last_name" %>
+				<%= text_field_tag :last_name, @owner.last_name, :id => "owner_last_name" %>
 			</div>
 			<div class="field">
 				<%= label_tag :phone, "Teléfono*" %>
-				<%= text_field_tag :phone, nil, :id => "owner_phone" %>
+				<%= text_field_tag :phone, @owner.phone, :id => "owner_phone" %>
 			</div>
 			<div class="field">
 				<%= label_tag :mobile, "Teléfono móvil" %>
-				<%= text_field_tag :mobile, nil, :id => "owner_mobile" %>
+				<%= text_field_tag :mobile, @owner.mobile, :id => "owner_mobile" %>
 			</div>
 		</fieldset>
 	</div>
 	<div class="form_owner" id="busqueda-matricula">
-		<%= f.hidden_field :owner_id %>
+		<%= f.hidden_field :owner_id, :value => @owner.id %>
 	</div>
   <div class="field">
     <%#= f.label :owner_id %><br />
@@ -58,27 +62,27 @@
   <% end %>
 	<div id="form-coche" style="display:<%= f.object.new_record? ? "none" : "" %>">
 		<fieldset>
-			<h3>Nuevo coche</h3>
+			<h3><%= f.object.new_record? ? "Nuevo coche" : "Coche" %></h3>
 			<div class="field">
 				<%= label_tag :maker_id, "Fabricante*" %>
-				<%= text_field_tag :maker_id, nil, :id =>"search_marca_coche", :placeholder => 'Fabricante', data: {autocomplete_source: search_marca_coche_path} %>
+				<%= text_field_tag :maker_id, @car.maker.name, :id =>"search_marca_coche", :placeholder => 'Fabricante', data: {autocomplete_source: search_marca_coche_path} %>
 			</div>
 			<div class="field">
 				<%= label_tag :modelo_id, "Modelo*" %>
-				<%= text_field_tag :modelo_id, nil, :id =>"search_modelo_coche", :placeholder => 'Modelo', data: {autocomplete_source: search_modelo_coche_path} %>
+				<%= text_field_tag :modelo_id, @car.modelo.model, :id =>"search_modelo_coche", :placeholder => 'Modelo', data: {autocomplete_source: search_modelo_coche_path} %>
 			</div>
 			<div class="field">
 				<%= label_tag :year, "Año*" %>
-				<%= text_field_tag :year, nil, :id => "search_year_coche" %>
+				<%= text_field_tag :year, @car.year, :id => "search_year_coche" %>
 			</div>
 			<div class="field">
 				<%= label_tag :mileage, "Kilometraje*" %>
-				<%= text_field_tag :mileage, nil, :id => "search_km_coche" %>
+				<%= text_field_tag :mileage, @car.mileage, :id => "search_km_coche" %>
 			</div>
 		</fieldset>
 	</div>
 	<div class="form_car">
-		<%= f.hidden_field :car_id, :id => "add-car"%>
+		<%= f.hidden_field :car_id, :id => "add-car", :value=> @car.id%>
 	</div>
   <div class="field">
     <%#= f.label :car_id %><br />
@@ -86,24 +90,25 @@
   </div>
 
   <div class="field">
-    <%= f.label :comments, "Observaciones" %><br />
+    <%= f.label :comments, "Observaciones" %>
     <%= f.text_area :comments %>
   </div>
   <% unless f.object.new_record? %>
   <div class="field">
-    <%= f.label :status_id, "Estado de reparación" %><br />
-    <%= f.select :status_id, options_for_select([["Pendiente",0],["En desarrollo",1],["Terminado",2],["Factura emitida",3],["Factura pagada",4]]) %>
+    <%= f.label :status_id, "Estado de reparación" %>
+    <%= f.select :status_id, options_for_select([["Pendiente",0],["En desarrollo",1],["Terminado",2],["Factura emitida",3],["Factura pagada",4]]), :selected => @entry.status_id %>
   </div>
   <div class="field">
-    <%= f.label :hours, "Horas de trabajo" %><br />
+    <%= f.label :hours, "Horas de trabajo" %>
     <%= f.number_field :hours %>
   </div>
   <div class="field">
-    <%= f.label :departure_date, "Fecha de salida" %><br />
-    <%= f.datetime_select :departure_date %>
+    <%= f.label :departure_date, "Fecha de salida" %>
+	<span class="sep"></span>
+    <%= f.datetime_select :departure_date, use_month_numbers: true, order: [:day, :month, :year], include_blank: true %>
   </div>
   <% end %>
   <div class="actions">
-    <%= f.submit "Crear registro" %>
+    <%= f.submit f.object.new_record? ? "Crear registro" : "Guardar cambios" %>
   </div>
 <% end %>

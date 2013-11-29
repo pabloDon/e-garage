@@ -190,6 +190,14 @@ textarea{
 		margin-top: 12px;
 		width: 185px;
 	}
+	select[id^=entry_departure_date]{
+		width: 10px;
+		float:none;
+		width: auto;
+	}
+	.sep{
+		margin-left: 140px;
+	}
 }
 
 

@@ -19,7 +19,7 @@
 	<% unless @owner.cars.empty? %>
 		<h3>Coches en su propiedad</h3>
 		<% @owner.cars.each do |car| %>
-			<div class="car-item"><%= car.public_name %></div>
+			<div class="car-item"><%= link_to car.public_name, '#' %></div>
 		<% end %>
 	<% end %>
 </div>

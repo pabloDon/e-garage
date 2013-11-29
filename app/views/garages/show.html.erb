@@ -2,5 +2,29 @@
 <h1><%= @garage.name %></h1>
 
 <h2><i class="fa fa-flag-checkered"></i> Terminados</h2>
+	<div class="trabajos">
+	<% @terminados.each do |trabajo| %>
+		<div class="trabajo">
+			<span class="coche-desc"><%= link_to trabajo.car.public_name, trabajo %></span>
+			<span class="destacado terminado"><%= Entry.get_estado trabajo.status_id %> (<%= trabajo.created_at.strftime('%d/%m/%Y')%>)</span>
+		</div>
+	<% end %>
+	</div>
 <h2><i class="fa fa-spinner fa-spin"></i> Trabajando</h2>
+	<div class="trabajos">
+	<% @en_desarrollo.each do |trabajo| %>
+		<div class="trabajo">
+			<span class="coche-desc"><%= link_to trabajo.car.public_name, trabajo %></span>
+			<span class="destacado trabajando"><%= trabajo.created_at.strftime('%d/%m/%Y')%></span>
+		</div>
+	<% end %>
+	</div>
 <h2><i class="fa fa-clock-o"></i> Pendientes</h2> 
+	<div class="trabajos">
+	<% @pendientes.each do |trabajo| %>
+		<div class="trabajo">
+			<span class="coche-desc"><%= link_to trabajo.car.public_name, trabajo %></span>
+			<span class="destacado pendiente"><%= trabajo.created_at.strftime('%d/%m/%Y')%></span>
+		</div>
+	<% end %>
+	</div>

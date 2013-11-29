@@ -1,35 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Coche:</b>
+  <%= @entry.car.public_name if @entry.car %>
+</p>
+<p>
   <b>Owner:</b>
-  <%= @entry.owner_id %>
+  <%= link_to(@entry.owner.public_name, @entry.owner) if @entry.owner %>
 </p>
 
 <p>
-  <b>Car:</b>
-  <%= @entry.car_id %>
+  <b>Estado:</b>
+  <%= Entry.get_estado(@entry.status_id) if @entry.status_id %>
 </p>
 
 <p>
-  <b>Status:</b>
-  <%= @entry.status_id %>
-</p>
-
-<p>
-  <b>Comments:</b>
+  <b>Comentarios:</b>
   <%= @entry.comments %>
 </p>
 
 <p>
-  <b>Hours:</b>
+  <b>Horas de trabajo:</b>
   <%= @entry.hours %>
 </p>
-
+<% if @entry.departure_date %>
 <p>
   <b>Departure date:</b>
-  <%= @entry.departure_date %>
+  <%= @entry.departure_date.strftime('%d/%m/%Y') %>
 </p>
+<% end %>
 
 
-<%= link_to 'Edit', edit_entry_path(@entry) %> |
-<%= link_to 'Back', entries_path %>
+<%= link_to 'Actualizar información', edit_entry_path(@entry) %> |
+<%= link_to 'Retroceder', my_garage_path %>

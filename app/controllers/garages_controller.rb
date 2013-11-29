@@ -16,7 +16,10 @@ class GaragesController < ApplicationController
   # GET /garages/1.json
   def show
     set_tab :garage
-    @garage = Garage.find(current_garage.id)
+    @garage = Garage.find current_garage.id
+    @pendientes = Entry.pendientes
+    @en_desarrollo = Entry.en_desarrollo
+    @terminados = Entry.terminados
 
     respond_to do |format|
       format.html # show.html.erb
